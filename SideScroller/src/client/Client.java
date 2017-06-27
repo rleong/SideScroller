@@ -1,4 +1,4 @@
-package control;
+package client;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
@@ -6,6 +6,12 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import enums.ControlIDs;
 import gfx.Images;
@@ -84,10 +90,20 @@ public class Client extends Canvas {
 
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws UnknownHostException, IOException {
 
 		Client client = new Client();
-		Window window = new Window(ControlIDs.loginMenu, client);
+		ClientWindow window = new ClientWindow(ControlIDs.loginMenu, client);
+		
+		String name = "Test";
+		Socket socket = new Socket("localhost", 4444);
+		PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		
+		while(true){
+			String readerInput = bufferedReader.readLine();
+			printWriter.println(name + ": " + readerInput);
+		}
 
 	}
 

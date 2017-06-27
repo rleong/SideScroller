@@ -1,4 +1,4 @@
-package control;
+package util;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,11 +8,11 @@ import javax.swing.SwingUtilities;
 
 // Obtained from https://stackoverflow.com/questions/14706674/system-out-println-to-jtextarea
 
-public class VisualOutputStream extends OutputStream{
+public class JTextAreaOutputStream extends OutputStream{
 	
 	private final JTextArea destination;
 	
-	public VisualOutputStream (JTextArea destination){
+	public JTextAreaOutputStream (JTextArea destination){
 		
 		if (destination == null) {
 			throw new IllegalArgumentException ("Destination is null");
