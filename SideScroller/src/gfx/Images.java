@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 public class Images {
 	
 	// GUI related
-	BufferedImage loginMenu;
+	BufferedImage mainMenu;
 	BufferedImage serverMenu;
 	BufferedImage loginButton;
 	BufferedImage optionsButton;
@@ -19,7 +19,7 @@ public class Images {
 	public Images(){
 		
 		// GUI related
-		loginMenu = createImage("gui/LoginMenu.png");
+		mainMenu = createImage("gui/MainMenu.png");
 		serverMenu = createImage("gui/ServerMenu.png");
 		loginButton = createImage("gui/buttons/LoginButton.png");
 		optionsButton = createImage("gui/buttons/OptionsButton.png");
@@ -46,7 +46,7 @@ public class Images {
 	// Getters
 	
 	public BufferedImage getLoginMenu(){
-		return loginMenu;
+		return mainMenu;
 	}
 	
 	public BufferedImage getServerMenu(){

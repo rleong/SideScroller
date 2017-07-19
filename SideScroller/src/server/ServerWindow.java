@@ -39,11 +39,53 @@ public class ServerWindow {
 	private Dimension buttonSize = new Dimension(75, 25);
 	private JTextArea textArea;
 	private JScrollPane scroller;
-
+	private Server server;
+	
 	// Borders count for some reason
 	private final int hOffset = 29, wOffset = 6;
 
 	public ServerWindow() {
+		frame = new JFrame();
+		frame.setLayout(null);
+
+		textArea = new JTextArea(780, 400);
+		title = "Rusty's Game: Server";
+		dm.setSize(800 + wOffset, 450 + hOffset);
+
+		startButton.setSize(buttonSize);
+		startButton.setLocation(10, 25);
+
+		endButton.setSize(buttonSize);
+		endButton.setLocation(100, 25);
+
+		textArea.setEditable(false);
+		scroller = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroller.setLocation(10, 85);
+		scroller.setSize(780, 355);
+
+		frame.add(startButton);
+		frame.add(endButton);
+		frame.add(scroller);
+
+		JTextAreaOutputStream out = new JTextAreaOutputStream(textArea);
+		System.setOut(new PrintStream(out));
+
+		startButton.addActionListener(startButtonPressed);
+
+		frame.setTitle(title);
+		frame.setSize(dm);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setAlwaysOnTop(true);
+		frame.setVisible(true);
+
+		// debug();
+	}
+	
+	public ServerWindow(Server server) {
+		this.server = server;
 		frame = new JFrame();
 		frame.setLayout(null);
 
@@ -107,15 +149,8 @@ public class ServerWindow {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			try {
-				new Server().runServer();
-				System.out.println("Server has started...");
-			} catch (IOException e1) {
-				System.out.println("Server has encountered a problem: ");
-				System.out.println(e1);
-				e1.printStackTrace();
-			}
-			// System.out.println("LOL");
+			server.runServer();
+			
 		}
 
 	};

@@ -14,21 +14,18 @@ public class Server {
 	// Multiple Client-Server tutorial from ZA JAVA Language: https://www.youtube.com/watch?v=2cQJJwoSNLk
 	public static final int PORT = 4444;
 	
-	public void runServer() throws IOException {
+	public void runServer() {
 
-		ServerSocket serverSocket = new ServerSocket(PORT);
-		System.out.println("Server up and ready for connections...");
-		
-		while (true) {
-			Socket socket = serverSocket.accept();
-			new ServerThread(socket).start();
-		}
+		new RunThread().start();
+		System.out.println("Server has started...");
 		
 	}
 
 	public static void main(String args[]) throws IOException {
 
-		ServerWindow window = new ServerWindow();
+		Server server = new Server();
+		ServerWindow window = new ServerWindow(server);
+		//server.runServer();
 		
 	}
 	
@@ -52,9 +49,32 @@ public class Server {
 				}
 				socket.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+		}
+		
+	}
+	
+	// With the help of u/g051051 from Reddit
+	
+	public class RunThread extends Thread {
+		
+		public void run(){
+			
+			try {
+				ServerSocket serverSocket = new ServerSocket(PORT);
+				System.out.println("Server up and ready for connections...");
+				
+				while (true) {
+					Socket socket = serverSocket.accept();
+					new ServerThread(socket).start();
+				}
+				
+			} catch (IOException ioe) {
+				
+				ioe.printStackTrace();
+			}	
 			
 		}
 		

@@ -3,6 +3,6 @@ package enums;
 public enum ControlIDs {
 	
 	// Type of Windows
-	clientWindow(), serverWindow(), loginMenu();
+	clientWindow(), serverWindow(), loginMenu(), mainMenu();
 	
 }
